@@ -1,17 +1,16 @@
-<%= form_with(model: user, local: true) do |f| %>
-
-	<% if user.errors.any? %>
+<%= form_for @user do |f| %>
+  <% if @user.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(user.errors.count, "error") %> prohibited this band from being saved:</h2>
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this band from being saved:</h2>
 
       <ul>
-      <% user.errors.full_messages.each do |msg| %>
+      <% @user.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>
     </div>
   <% end %>
-	<p>
+  <p>
     <%= f.label :first_name %><br />
     <%= f.text_field :first_name %>
   </p>
@@ -31,11 +30,11 @@
     <%= f.label :password_confirmation, "Confirm Password" %><br />
     <%= f.password_field :password_confirmation %>
   </p>
-	<p>
+  <p>
     <%= f.label :role %><br />
     <%= f.select :role, User::ROLES, :prompt => "Select ..." %>
   </p>
-	<p>
+  <p>
     <%= f.label :band_id %><br />
     <%= f.collection_select :band_id, Band.all, :id, :name, :prompt => "Choose..." %>
   </p>

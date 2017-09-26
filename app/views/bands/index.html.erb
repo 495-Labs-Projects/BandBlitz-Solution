@@ -18,9 +18,14 @@
       <% end %>
       <td align="center">
         <!-- ONLY SHOW THIS IF THE USER IS ALLOWED TO EDIT THE BAND -->
-        <%= link_to(image_tag("icons/edit_dg.gif", :border => 0), edit_band_path(band)) %> &nbsp;
+        <% if can? :update, band %>
+          <%= link_to(image_tag("icons/edit_dg.gif", :border => 0), edit_band_path(band)) %> &nbsp;
+        <% end %>
+        
         <!-- ONLY SHOW THIS IF THE USER IS ALLOWED TO DELETE THE BAND -->
+        <% if can? :destroy, band %>
         <%= link_to(image_tag("icons/delete_dg.gif", :border => 0), band_path(band), :confirm => 'Are you sure you wish to delete this band?', :method => :delete) %>
+        <% end %>
       
       </td>
     </tr>
@@ -28,4 +33,6 @@
 </table>
 <p class="supertiny">&nbsp;</p>
   <!-- ONLY SHOW THIS IF THE USER IS ALLOWED TO CREATE A BAND -->
-  <p><%= link_to "Create New Band", new_band_path %></p>
+  <% if can? :create, Band %>
+    <p><%= link_to "Create New Band", new_band_path %></p>
+  <% end %>

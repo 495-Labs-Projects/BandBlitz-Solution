@@ -1,5 +1,7 @@
 class GenresController < ApplicationController
   before_action :set_genre, only: [:show, :edit, :update, :destroy]
+  #before_action :check_login
+  authorize_resource
 
   # GET /genres
   # GET /genres.json
@@ -10,7 +12,6 @@ class GenresController < ApplicationController
   # GET /genres/1
   # GET /genres/1.json
   def show
-    set_genre
   end
 
   # GET /genres/new
@@ -20,7 +21,6 @@ class GenresController < ApplicationController
 
   # GET /genres/1/edit
   def edit
-    set_genre
   end
 
   # POST /genres
@@ -37,7 +37,6 @@ class GenresController < ApplicationController
   # PATCH/PUT /genres/1
   # PATCH/PUT /genres/1.json
   def update
-    set_genre
     if @genre.update_attributes(genre_params)
       redirect_to(@genre, :notice => 'Genre was successfully updated.')
     else
@@ -48,7 +47,6 @@ class GenresController < ApplicationController
   # DELETE /genres/1
   # DELETE /genres/1.json
   def destroy
-    set_genre
     @genre.destroy
     redirect_to(genres_url)
   end
